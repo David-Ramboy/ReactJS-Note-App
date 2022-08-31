@@ -1,38 +1,120 @@
-.App {
-  text-align: center;
+*, *::after, *::before{
+    box-sizing: border-box;
+    margin: 0;
+    font-family: Inter;
+
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+.Note--app{
+    display: flex;
+}
+/* Notes */
+.notes--container{
+    width: 400px;
+    height: 100vmin;
+    border: 1px solid;
+}
+.add--icon{
+    margin-left: auto;
+}
+.nav--notes{
+    display: flex;
+    border: 1px solid;
+    padding: 40px 80px;
+}
+.store--notes{
+    border: 1px solid;
+    padding: 20px 5px;
+    
+}
+/* Notes */
+
+/* Workplace */
+.workplace--container{
+    width: 100%;
+    height: 100vh;
+    border: 1px blue solid;
+
+}
+.icon{
+    width: 20px;
+    display: block;
+}
+.workplace--nav{
+    display: flex;
+    border: 1px solid;
+    align-items: center;
+    padding: 10px;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+.workplace--nav *{
+    margin-left: 10px;
+}
+.text{
+    display: flex;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+.photo--icon,.code--icon{
+    height: 18px;
 }
+.text--adjust--two h1:nth-child(2){
+    font-size: 40px;
+    height: 0;
+    line-height: 37px;
+    
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
 }
+.text--adjust--two h1:nth-child(1){
+    font-size: 16px;
+    height: 0;
+    line-height: 20px;
+    width: 27px;
 
-.App-link {
-  color: #61dafb;
 }
+.text--adjust> h1 > b{
+    font-family: initial;
+}
+.text--adjust{
+    margin: 0;
+    font-size: 12px;
+}
+.text--adjust--two{
+    margin: 0;
+}
+.text-button{
+    display: flex;
+    margin: 0;
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
 }
+.text--list{
+    margin-right: 5px;
+    
+}
+.number--icon{
+    height: 19px;
+    margin-top: 1px;
+}
+.textarea--workplace{
+    font-size: 1rem;
+    padding: 10px;
+    width:100%;
+    height: 80%;
+
+}
+.icon, .text > h1{
+    cursor: pointer;
+}
+/* preview */
+.preview{
+    font-size: 1rem;
+    border: 1px saddlebrown solid;
+    width: 100%;
+    text-align: unset;
+    white-space: pre-wrap;
+    position: absolute;
+    top: 1px;
+    padding: 10px;
+
+}
+/* Workplace */
