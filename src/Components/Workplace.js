@@ -1,13 +1,8 @@
-import React, {useState, useEffect}from "react";
+import React, {useState}from "react";
 import Bold from "./Workplace-features/Bold";
 
 export default function Workplace(){
 
-    class Offset{
-        constructor(offset){
-            this.offset = offset;
-        }
-    }
     // bold Component
     const [boldSelection, setBoldSelection] = useState('');
     
@@ -57,10 +52,7 @@ export default function Workplace(){
         let textArea = document.getElementsByTagName('textarea')
         let offset = textArea[0].selectionStart
 
-        const offset1 = new Offset(offset);
-        console.log(offset,'offset')
         let valueTextAr = textInput
-        console.log(valueTextAr.length)
     
         // implementation of picking word
         let storLeft = [];
@@ -141,66 +133,6 @@ export default function Workplace(){
             return <div className="preview">{textInput}</div>  
         })
     }
-
-    // Text Area Click and send the Clicked word to the Bold Component
-
-        // const [clickedWord, setClickedWord] = useState('');
-    
-   
-        // let range;
-        // let textNode;
-        // let offset;
-
-    // if (document.caretRangeFromPoint) {
-    //     range = document.caretRangeFromPoint(target.clientX, target.clientY);
-    // console.log(target.clientX, target.clientY,"client")
-    
-    // textNode = range.startContainer.textContent;
-    // offset = range.startOffset;
-    // console.log(range,"range")
-    // console.log(textNode, "textnode")
-    // console.log(offset,"offset")
-
-
-    // } else if (document.caretPositionFromPoint) {
-    //     range = document.caretPositionFromPoint(e.clientX, e.clientY);
-    //     textNode = range.offsetNode;
-    //     offset = range.offset;
-        
-
-    // } else {
-    //     document.body.textContent = "[This browser supports neither"
-    //     + " document.caretRangeFromPoint"
-    //     + " nor document.caretPositionFromPoint.]";
-    //     return;
-    // }
-    
-    // Get the word by pick separate left and right word based on the caret
-    function pickWord(offset){
-        let wordString = textInput;
-
-        let storeLeft = [];
-        let storeRight = [];
-
-        // StoreLeft 
-        for(let i = offset - 1; wordString.length; i--){
-            if(wordString[i] === " " || i === -1){
-                break;
-            }else{
-                storeLeft.push(wordString[i]);
-
-            }
-        }
-        console.log(wordString)
-
-    }
-
-
-
-
-        
-        
-
   
     return(
         <div className="workplace--container">
