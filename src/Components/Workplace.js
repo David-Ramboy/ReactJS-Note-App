@@ -1,9 +1,18 @@
-import React, {useState}from "react";
+import React, {useState, useEffect}from "react";
 import Bold from "./Workplace-features/Bold";
+
 export default function Workplace(){
 
+    class Offset{
+        constructor(offset){
+            this.offset = offset;
+        }
+    }
+    // bold Component
+    const [boldSelection, setBoldSelection] = useState('');
+    
     // Main text 
-const  [textInput, settextInput] = useState("")
+    const  [textInput, settextInput] = useState("")
 
     // Onclick Header 
     function textAdjust(event){
@@ -21,6 +30,9 @@ const  [textInput, settextInput] = useState("")
 
     // Handle the first letter must be Capital
     function handleChange(event){
+     
+           
+
         let textValue = event.target.value
         let firstText;
         if(event.key === 13 ){
@@ -30,6 +42,7 @@ const  [textInput, settextInput] = useState("")
         }
         settextInput(prev => {
             if(textValue.length === 1){
+                
                 return firstText
             }else{
                 return textValue
@@ -39,6 +52,70 @@ const  [textInput, settextInput] = useState("")
     
         
     }
+ 
+    function handleOnlick(event){
+        let textArea = document.getElementsByTagName('textarea')
+        let offset = textArea[0].selectionStart
+
+        const offset1 = new Offset(offset);
+        console.log(offset,'offset')
+        let valueTextAr = textInput
+        console.log(valueTextAr.length)
+    
+        // implementation of picking word
+        let storLeft = [];
+        let storeRight = [];
+        // left side of the word
+        for(let i = offset - 1;valueTextAr.length; i--){
+            if(valueTextAr[i] === " " || i === -1){
+                break;
+            }else{
+                storLeft.push(valueTextAr[i])
+            }
+        }
+        //right side of the word
+        for(let i = offset; valueTextAr.length; i++){
+            if(valueTextAr[i] === " " || valueTextAr[i] ===  "" || valueTextAr[i] ===  undefined)
+            {
+                break;
+            }else{
+                storeRight.push(valueTextAr[i]);
+            }
+        }
+
+
+        // Reverse the storeLeft
+        function reverseString(str){
+            //checkinput
+            if(!str|| str.length < 0|| typeof str !== "string"){
+                return ' ';
+            }
+
+            // Take Empty array revAraay
+            const revArray = [];
+            const length = str.length - 1;
+
+            // looping from the end
+
+            for(let i = length; i >= 0; i--){
+                revArray.push(str[i]);
+            }
+
+            // Joining the array elements
+            return revArray.join('');
+        }
+
+        let lefString = reverseString(storLeft.join('').toString())
+
+        storLeft = lefString;
+
+        storeRight = storeRight.join('').toString();
+        let wordPick = storLeft + storeRight;
+
+        console.log(wordPick)
+        setBoldSelection(wordPick)
+    }
+    console.log(boldSelection, "bold")
 
     // The Write and Preview Button to display both
     const [displayPreview, setDisplayPreview] = useState(true)
@@ -65,6 +142,65 @@ const  [textInput, settextInput] = useState("")
         })
     }
 
+    // Text Area Click and send the Clicked word to the Bold Component
+
+        // const [clickedWord, setClickedWord] = useState('');
+    
+   
+        // let range;
+        // let textNode;
+        // let offset;
+
+    // if (document.caretRangeFromPoint) {
+    //     range = document.caretRangeFromPoint(target.clientX, target.clientY);
+    // console.log(target.clientX, target.clientY,"client")
+    
+    // textNode = range.startContainer.textContent;
+    // offset = range.startOffset;
+    // console.log(range,"range")
+    // console.log(textNode, "textnode")
+    // console.log(offset,"offset")
+
+
+    // } else if (document.caretPositionFromPoint) {
+    //     range = document.caretPositionFromPoint(e.clientX, e.clientY);
+    //     textNode = range.offsetNode;
+    //     offset = range.offset;
+        
+
+    // } else {
+    //     document.body.textContent = "[This browser supports neither"
+    //     + " document.caretRangeFromPoint"
+    //     + " nor document.caretPositionFromPoint.]";
+    //     return;
+    // }
+    
+    // Get the word by pick separate left and right word based on the caret
+    function pickWord(offset){
+        let wordString = textInput;
+
+        let storeLeft = [];
+        let storeRight = [];
+
+        // StoreLeft 
+        for(let i = offset - 1; wordString.length; i--){
+            if(wordString[i] === " " || i === -1){
+                break;
+            }else{
+                storeLeft.push(wordString[i]);
+
+            }
+        }
+        console.log(wordString)
+
+    }
+
+
+
+
+        
+        
+
   
     return(
         <div className="workplace--container">
@@ -75,7 +211,7 @@ const  [textInput, settextInput] = useState("")
                 </div>
                 <div className="text--adjust text">
                     <h1 onClick={textAdjust}><b>H</b></h1>
-                    <Bold  textArea={[textInput,settextInput]}/>
+                    <Bold  textArea={[textInput,settextInput]} offset={boldSelection}/>
                     <h1><b><i>I</i></b></h1>
                     <h1><b><s>S</s></b></h1>
                 </div>
@@ -94,7 +230,7 @@ const  [textInput, settextInput] = useState("")
             </nav>
             <div style={{display:"",position:"relative", height:"100%"}}>
                 {displayPreview ?
-                <textarea className="textarea--workplace" onChange={handleChange} value={textInput}/> :
+                <textarea className="textarea--workplace" onChange={handleChange} onClick={handleOnlick} value={textInput}/> :
                 previewVar               
                 }
             </div>
